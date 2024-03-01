@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_hw1/NewLess.dart';
+
+import 'package:flutter_application_hw1/loginview2.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -18,58 +21,127 @@ class _LoginViewState extends State<LoginView> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(children: [
-            const Text(
-              'DARE             ',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: "Lucida Handwriting",
-                fontSize: 50,
+            Image.network(
+                'https://previews.123rf.com/images/snhandini/snhandini1806/snhandini180600315/103958869-dare-to-be-different-lettering-quote.jpg',
+                height: 300,
+                width: 300),
+            const SizedBox(height: 30),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 1.0),
+                child: Text(
+                  'ABOUT US:',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Lucida Handwriting",
+                      fontSize: 30),
+                ),
               ),
             ),
-            const Text(
-              ' TO BE           ',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: "Lucida Handwriting",
-                fontSize: 50,
+            const SizedBox(height: 10),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 1.0),
+                child: Text(
+                  'Hello there!!!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Lucida Handwriting",
+                    fontSize: 20,
+                  ),
+                ),
               ),
             ),
-            const Text(
-              '    UNIQUE...       ',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: "Lucida Handwriting",
-                fontSize: 50,
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 1.0),
+                child: Text(
+                  'This is jo,This is the store where you can desgin your own dresses,as per your wish we design your dress at low cost.We are dare to create new, Are you?... ',
+                  style: TextStyle(
+                    fontFamily: " Papyrus",
+                    fontSize: 20,
+                  ),
+                ),
               ),
             ),
-            const SizedBox(height: 50),
-            const Text(
-              'ABOUT US:                 ',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: "Lucida Handwriting",
-                fontSize: 30,
-              ),
-            ),
-            const Text(
-              'Hello there!!!,                                                  This is jo,This the store where you can degin your own dresses,as per your wish we design your dress at low cost.                     We are dare to create new, Are you?... ',
-              style: TextStyle(
-                fontFamily: " Papyrus",
-                fontSize: 20,
-              ),
-            ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 10),
             const Text("JoJo Store"),
-            ElevatedButton(
+            Container(
+              height: 50,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'home_view');
+                  Navigator.of(context).push(_createRoute());
                 },
-                child: const Text("click here to login...")),
-            const Text("LOGIN PAGE")
+                child: const Text('StateFull Login'),
+              ),
+            ),
+            Container(
+              height: 50,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(ScaleRoute(page: const NewLessLogin()));
+                },
+                child: const Text('Stateless Login'),
+              ),
+            ),
           ]),
         ));
   }
-  //yuiytiuyty
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const LoginView2(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
+
+class ScaleRoute extends PageRouteBuilder {
+  final Widget page;
+  ScaleRoute({required this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              ScaleTransition(
+            scale: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.fastOutSlowIn,
+              ),
+            ),
+            child: child,
+          ),
+        );
 }
