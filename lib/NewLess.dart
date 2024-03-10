@@ -1,4 +1,35 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: file_names
+
+import 'package:flutter/material.dart'
+    show
+        Alignment,
+        Animation,
+        AppBar,
+        BuildContext,
+        Center,
+        Color,
+        Column,
+        Container,
+        CurvedAnimation,
+        Curves,
+        EdgeInsets,
+        ElevatedButton,
+        InputDecoration,
+        MainAxisAlignment,
+        Navigator,
+        OutlineInputBorder,
+        PageRouteBuilder,
+        Row,
+        Scaffold,
+        ScaleTransition,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextButton,
+        TextField,
+        TextStyle,
+        Tween,
+        Widget;
 import 'package:flutter_application_hw1/homeview.dart';
 
 class NewLessLogin extends StatelessWidget {
@@ -59,7 +90,8 @@ class NewLessLogin extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(ScaleRoute(page: HomeView()));
+                  Navigator.of(context)
+                      .push(ScaleRoute(page: const HomeView()));
                 },
                 child: const Text('Login'),
               ),

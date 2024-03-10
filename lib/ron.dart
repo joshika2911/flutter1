@@ -12,7 +12,7 @@ class _RonPageState extends State<RonPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("JoJo Store albus"),
+        title: const Text("JoJo Store ron"),
       ),
     );
   }

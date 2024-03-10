@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_hw1/homeview.dart';
 
 class LoginView2 extends StatefulWidget {
-  const LoginView2({super.key});
-
+  const LoginView2({super.key, this.email});
+  final String? email;
   @override
   State<LoginView2> createState() => _LoginView2State();
 }
 
 class _LoginView2State extends State<LoginView2> {
-  get nameController => null;
-
+  bool c = true;
+  get emailController => null;
   get passwordController => null;
 
   @override
@@ -32,45 +32,69 @@ class _LoginView2State extends State<LoginView2> {
                   'Sign in',
                   style: TextStyle(fontSize: 20),
                 )),
-            Container(
-              padding: const EdgeInsets.all(10),
+            Padding(
+              padding: const EdgeInsets.all(12),
               child: TextField(
-                controller: nameController,
+                controller: emailController,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
-                ),
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)))),
+                onChanged: (value) => {debugPrint("typed value->$value")},
               ),
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            Padding(
+              padding: const EdgeInsets.all(12),
               child: TextField(
-                obscureText: true,
+                obscureText: c,
                 controller: passwordController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
+                decoration: InputDecoration(
+                    suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            c = !c;
+                          });
+                        },
+                        child: c
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off)),
+                    labelText: 'Password',
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)))),
+                onChanged: (value) => {debugPrint("typed value->$value")},
               ),
             ),
             TextButton(
               onPressed: () {
-                //forgot password screen
+                Navigator.pushNamed(context, "home_view");
               },
               child: const Text(
                 'Forgot Password',
               ),
             ),
-            Container(
-              height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(_createRoute());
-                },
-                child: const Text('Login'),
-              ),
+            // Container(
+            //   height: 50,
+            //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.of(context).push(_createRoute());
+            //   },
+            //   child: const Text('Login with animation'),
+            //   // ),
+            // ),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            HomeView(email: emailController.text)));
+              },
+              child: const Text('Login'),
+              // ),
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -97,23 +121,23 @@ class _LoginView2State extends State<LoginView2> {
   }
 }
 
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const HomeView(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
+// Route _createRoute() {
+//   return PageRouteBuilder(
+//     pageBuilder: (context, animation, secondaryAnimation) => const HomeView(),
+//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       const begin = Offset(0.0, 1.0);
+//       const end = Offset.zero;
+//       const curve = Curves.ease;
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
+//       return SlideTransition(
+//         position: animation.drive(tween),
+//         child: child,
+//       );
+//     },
+//   );
+// }
 
         // backgroundColor: Colors.lightBlueAccent,
        

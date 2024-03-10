@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_hw1/NewLess.dart';
-
-import 'package:flutter_application_hw1/loginview2.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -76,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(_createRoute());
+                  Navigator.pushNamed(context, "login_view2");
                 },
                 child: const Text('StateFull Login'),
               ),
@@ -86,8 +83,7 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(ScaleRoute(page: const NewLessLogin()));
+                  Navigator.pushNamed(context, "login_view2");
                 },
                 child: const Text('Stateless Login'),
               ),
@@ -97,24 +93,24 @@ class _LoginViewState extends State<LoginView> {
   }
 }
 
-//comment  s
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const LoginView2(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
+//comment
+// Route _createRoute() {
+//   return PageRouteBuilder(
+//     pageBuilder: (context, animation, secondaryAnimation) => LoginView2(
+//       email: emailcontoller.text,
+//     ),
+//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       const begin = Offset(0.0, 1.0);
+//       const end = Offset.zero;
+//       const curve = Curves.ease;
+//       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//       return SlideTransition(
+//         position: animation.drive(tween),
+//         child: child,
+//       );
+//     },
+//   );
+// }
 
 class ScaleRoute extends PageRouteBuilder {
   final Widget page;

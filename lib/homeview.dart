@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
-
+  const HomeView({super.key, this.email});
+  final String? email;
   @override
   State<HomeView> createState() => _HomeViewState();
 }
@@ -17,7 +17,6 @@ class _HomeViewState extends State<HomeView> {
         ),
         body: SingleChildScrollView(
             child: Column(children: [
-          // const Text("WELCOME TO JoJo Store"),
           Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
               child: Row(
@@ -32,10 +31,13 @@ class _HomeViewState extends State<HomeView> {
                             'assets/harrypotter.jpg',
                           ),
                         ),
-                        const Padding(
-                            padding: EdgeInsets.all(20),
+                        Padding(
+                            padding: const EdgeInsets.all(20),
                             child: Column(
-                              children: [Text("hello"), Text("josh")],
+                              children: [
+                                const Text("hello"),
+                                Text(widget.email ?? "User")
+                              ],
                             )),
                       ],
                     ),
@@ -49,19 +51,16 @@ class _HomeViewState extends State<HomeView> {
             child: Image.asset('assets/albus.jpg',
                 width: 150, height: 150, fit: BoxFit.fill),
           ),
-
           const ListTile(
             title: Text('Albus Dumbledore'),
             subtitle: Text(
                 'A benevolent old man who helps Harry Potter through his trials and tribulations.'),
           ),
-
           TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, "albus_view");
               },
               child: const Text("Click Here")),
-
           ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8.0),
@@ -80,7 +79,6 @@ class _HomeViewState extends State<HomeView> {
                 Navigator.pushNamed(context, "ron_view");
               },
               child: const Text("Click Here")),
-
           ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8.0),
