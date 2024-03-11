@@ -12,8 +12,8 @@ class LoginView2 extends StatefulWidget {
 
 class _LoginView2State extends State<LoginView2> {
   bool c = true;
-  get emailController => null;
-  get passwordController => null;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
